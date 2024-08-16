@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ This file is based on "vbnet.lang" which is part of GtkSourceView
+
+ Author: Tobias Koch
+ Date:   August 2024
+
+ Author of vbnet.lang: John Luke <jluke@cfl.rr.com>
+ Copyright (C) 2004 John Luke <jluke@cfl.rr.com>
+
+ GtkSourceView is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ GtkSourceView is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this library; if not, see <http://www.gnu.org/licenses/>.
+
+-->
+<language id="xcbasic" name="XC=BASIC" version="2.0" _section="Source">
+  <metadata>
+    <property name="mimetypes">text/xc-basic</property>
+    <property name="globs">*.bas</property>
+    <property name="line-comment-start">'</property>
+  </metadata>
+
+  <styles>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="preprocessor" name="Preprocessor" map-to="def:preprocessor"/>
+    <style id="keyword" name="Keyword" map-to="def:keyword"/>
+    <style id="function" name="Function" map-to="def:function"/>
+    <style id="type" name="Data Type" map-to="def:type"/>
+    <style id="special-constant" name="Special constant" map-to="def:special-constant"/>
+    <style id="boolean" name="Boolean value" map-to="def:boolean"/>
+  </styles>
+
+  <default-regex-options case-sensitive="false"/>
+
+  <definitions>
+
+    <context id="line-comment" style-ref="comment" end-at-line-end="true" class="comment" class-disabled="no-spell-check">
+      <start>'</start>
+      <include>
+        <context ref="def:in-line-comment"/>
+      </include>
+    </context>
+
+    <context id="old-style-comment" style-ref="comment" end-at-line-end="true" class="comment" class-disabled="no-spell-check">
+      <start>^rem</start>
+      <include>
+        <context ref="def:in-line-comment"/>
+      </include>
+    </context>
+
+    <context id="string" style-ref="string" end-at-line-end="true" class="string" class-disabled="no-spell-check">
+      <start>"</start>
+      <end>"</end>
+    </context>
+
+    <context id="preprocessor" style-ref="preprocessor" end-at-line-end="true">
+      <start extended="true">
+        ^\s*#\s*
+        (define|undef|if(n?def)?|else|elif|end if|line|error|region|end region)
+        \b
+      </start>
+      <include>
+        <context ref="line-comment"/>
+      </include>
+    </context>
+
+    <context id="address" style-ref="keyword">
+      <match>@</match>
+    </context>
+
+    <context id="keywords" style-ref="keyword">
+      <keyword>and</keyword>
+      <keyword>as</keyword>
+      <keyword>asm</keyword>
+      <keyword>background</keyword>
+      <keyword>border</keyword>
+      <keyword>call</keyword>
+      <keyword>case</keyword>
+      <keyword>charat</keyword>
+      <keyword>charset</keyword>
+      <keyword>const</keyword>
+      <keyword>continue</keyword>
+      <keyword>data</keyword>
+      <keyword>declare</keyword>
+      <keyword>dim</keyword>
+      <keyword>do</keyword>
+      <keyword>doke</keyword>
+      <keyword>else</keyword>
+      <keyword>end</keyword>
+      <keyword>error</keyword>
+      <keyword>exit</keyword>
+      <keyword>fast</keyword>
+      <keyword>filter</keyword>
+      <keyword>for</keyword>
+      <keyword>function</keyword>
+      <keyword>get</keyword>
+      <keyword>get</keyword>
+      <keyword>gosub</keyword>
+      <keyword>goto</keyword>
+      <keyword>hscroll</keyword>
+      <keyword>if</keyword>
+      <keyword>incbin</keyword>
+      <keyword>include</keyword>
+      <keyword>inline</keyword>
+      <keyword>input</keyword>
+      <keyword>interrupt</keyword>
+      <keyword>let</keyword>
+      <keyword>load</keyword>
+      <keyword>locate</keyword>
+      <keyword>loop</keyword>
+      <keyword>memcpy</keyword>
+      <keyword>memset</keyword>
+      <keyword>memshift</keyword>
+      <keyword>mod</keyword>
+      <keyword>next</keyword>
+      <keyword>not</keyword>
+      <keyword>on</keyword>
+      <keyword>open</keyword>
+      <keyword>option</keyword>
+      <keyword>or</keyword>
+      <keyword>origin</keyword>
+      <keyword>overload</keyword>
+      <keyword>poke</keyword>
+      <keyword>print</keyword>
+      <keyword>private</keyword>
+      <keyword>randomize</keyword>
+      <keyword>rem</keyword>
+      <keyword>return</keyword>
+      <keyword>save</keyword>
+      <keyword>screen</keyword>
+      <keyword>select case</keyword>
+      <keyword>shared</keyword>
+      <keyword>sound clear</keyword>
+      <keyword>sprite</keyword>
+      <keyword>sprite clear hit</keyword>
+      <keyword>sprite multicolor</keyword>
+      <keyword>static</keyword>
+      <keyword>step</keyword>
+      <keyword>sub</keyword>
+      <keyword>swap</keyword>
+      <keyword>sys</keyword>
+      <keyword>textat</keyword>
+      <keyword>then</keyword>
+      <keyword>this</keyword>
+      <keyword>to</keyword>
+      <keyword>type</keyword>
+      <keyword>until</keyword>
+      <keyword>vmode</keyword>
+      <keyword>voice</keyword>
+      <keyword>volume</keyword>
+      <keyword>vscroll</keyword>
+      <keyword>wait</keyword>
+      <keyword>while</keyword>
+      <keyword>xor</keyword>
+    </context>
+
+    <context id="iokeywords" style-ref="keyword">
+      <suffix>#</suffix>
+      <keyword>input</keyword>
+      <keyword>print</keyword>
+      <keyword>read</keyword>
+      <keyword>write</keyword>
+    </context>
+
+    <context id="functions" style-ref="function">
+      <keyword>abs</keyword>
+      <keyword>asc</keyword>
+      <keyword>atn</keyword>
+      <keyword>c(byte|float|int|long|word)</keyword>
+      <keyword>cos</keyword>
+      <keyword>csrlin</keyword>
+      <keyword>deek</keyword>
+      <keyword>err</keyword>
+      <keyword>exp</keyword>
+      <keyword>floor</keyword>
+      <keyword>joy</keyword>
+      <keyword>key</keyword>
+      <keyword>len</keyword>
+      <keyword>log</keyword>
+      <keyword>peek</keyword>
+      <keyword>pos</keyword>
+      <keyword>pow</keyword>
+      <keyword>rnd(b|i|l|w)?</keyword>
+      <keyword>scan</keyword>
+      <keyword>sgn</keyword>
+      <keyword>sh(l|r)</keyword>
+      <keyword>sin</keyword>
+      <keyword>spritebghit</keyword>
+      <keyword>spritehit</keyword>
+      <keyword>sqr</keyword>
+      <keyword>st</keyword>
+      <keyword>tan</keyword>
+      <keyword>ti</keyword>
+      <keyword>val</keyword>
+    </context>
+
+    <context id="strfunctions" style-ref="function">
+      <suffix>\$</suffix>
+      <keyword>chr</keyword>
+      <keyword>(left|mid|right)</keyword>
+      <keyword>(l|u)case</keyword>
+      <keyword>str</keyword>
+    </context>
+
+    <context id="types" style-ref="type">
+      <keyword>byte</keyword>
+      <keyword>decimal</keyword>
+      <keyword>float</keyword>
+      <keyword>long</keyword>
+      <keyword>int</keyword>
+      <keyword>string</keyword>
+      <keyword>word</keyword>
+    </context>
+
+    <context id="special-constants" style-ref="special-constant">
+      <keyword>nothing</keyword>
+      <keyword>null</keyword>
+    </context>
+
+    <context id="boolean" style-ref="boolean">
+      <keyword>false</keyword>
+      <keyword>true</keyword>
+    </context>
+
+    <context id="xcbasic" class="no-spell-check">
+      <include>
+        <context ref="line-comment"/>
+        <context ref="old-style-comment"/>
+        <context ref="string"/>
+        <!-- <context ref="preprocessor"/> -->
+        <context ref="address"/>
+        <context ref="keywords"/>
+        <context ref="iokeywords"/>
+        <context ref="functions"/>
+        <context ref="strfunctions"/>
+        <context ref="types"/>
+        <!-- <context ref="special-constants"/> -->
+        <context ref="boolean"/>
+      </include>
+    </context>
+
+  </definitions>
+
+</language>
